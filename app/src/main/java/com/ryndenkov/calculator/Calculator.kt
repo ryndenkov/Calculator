@@ -1,6 +1,5 @@
 package com.ryndenkov.calculator
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -16,7 +15,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -33,8 +31,7 @@ fun CalculatorPreview() {
     CalculatorTheme { }
 }
 
-var expression = mutableStateOf("45x8")
-var result = mutableStateOf("360")
+val viewModel = CalculatorViewModel()
 
 @Composable
 fun Calculator(modifier: Modifier = Modifier) {
@@ -43,6 +40,7 @@ fun Calculator(modifier: Modifier = Modifier) {
             .fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
+        val state = viewModel.state.value
         Column(
             modifier = Modifier
                 .clip(
@@ -61,13 +59,13 @@ fun Calculator(modifier: Modifier = Modifier) {
             horizontalAlignment = Alignment.End
         ) {
             Text(
-                text = expression.value,
+                text = state.expression,
                 fontSize = 36.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = MaterialTheme.colorScheme.onPrimaryContainer
             )
             Text(
-                text = result.value,
+                text = state.result,
                 fontSize = 17.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = MaterialTheme.colorScheme.onSecondaryContainer
@@ -119,9 +117,7 @@ fun Calculator(modifier: Modifier = Modifier) {
                     .weight(1f)
                     .clip(CircleShape)
                     .clickable {
-                        Log.d("Calculator", "Click AC")
-                        expression.value = ""
-                        result.value = ""
+                        viewModel.processUserInfo("AC")
                     }
                     .background(MaterialTheme.colorScheme.secondary)
                     .aspectRatio(1f),
@@ -306,6 +302,9 @@ fun Calculator(modifier: Modifier = Modifier) {
                 modifier = Modifier
                     .clip(CircleShape)
                     .weight(1f)
+                    .clickable {
+                        viewModel.processUserInfo("1")
+                    }
                     .background(MaterialTheme.colorScheme.primary)
                     .aspectRatio(1f),
                 contentAlignment = Alignment.Center
@@ -320,6 +319,9 @@ fun Calculator(modifier: Modifier = Modifier) {
                 modifier = Modifier
                     .clip(CircleShape)
                     .weight(1f)
+                    .clickable {
+                        viewModel.processUserInfo("2")
+                    }
                     .background(MaterialTheme.colorScheme.primary)
                     .aspectRatio(1f),
                 contentAlignment = Alignment.Center
