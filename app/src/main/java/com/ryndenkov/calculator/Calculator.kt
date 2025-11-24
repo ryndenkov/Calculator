@@ -65,12 +65,14 @@ fun Calculator(
                 is CalculatorState.Error -> {
                     Text(
                         text = currentState.expression,
+                        lineHeight = 36.sp,
                         fontSize = 36.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = MaterialTheme.colorScheme.error
                     )
                     Text(
                         text = "",
+                        lineHeight = 17.sp,
                         fontSize = 17.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = MaterialTheme.colorScheme.onSecondaryContainer
@@ -81,12 +83,14 @@ fun Calculator(
                 is CalculatorState.Input -> {
                     Text(
                         text = currentState.expression,
+                        lineHeight = 36.sp,
                         fontSize = 36.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = MaterialTheme.colorScheme.onPrimaryContainer
                     )
                     Text(
                         text = currentState.result,
+                        lineHeight = 17.sp,
                         fontSize = 17.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = MaterialTheme.colorScheme.onSecondaryContainer
@@ -96,12 +100,14 @@ fun Calculator(
                 is CalculatorState.Success -> {
                     Text(
                         text = currentState.result,
+                        lineHeight = 36.sp,
                         fontSize = 36.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = MaterialTheme.colorScheme.onPrimaryContainer
                     )
                     Text(
                         text = "",
+                        lineHeight = 17.sp,
                         fontSize = 17.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = MaterialTheme.colorScheme.onSecondaryContainer
@@ -302,7 +308,7 @@ fun Calculator(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "X",
+                    text = "x",
                     fontSize = 40.sp,
                     color = MaterialTheme.colorScheme.onBackground
                 )
